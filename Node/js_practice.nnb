@@ -1,0 +1,99 @@
+{
+    "cells": [
+        {
+            "language": "markdown",
+            "source": [
+                "#### Basics"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "const name = 'Parichay'\r\nconst age = 32\r\nconst address = 'Dehradun'\r\nlet str = 'My name is Parichay,age is 32,address is Dehradun'\r\nconsole.log(str.split(','))\r\nconsole.log(`My name is ${name},age is ${age} and address is ${address}`)"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "[ 'My name is Parichay', 'age is 32', 'address is Dehradun' ]",
+                                "My name is Parichay,age is 32 and address is Dehradun",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "// Reverse a string\r\nlet str = 'planet'\r\nlet newStr = ''\r\nfor(let i = str.length-1; i >= 0; i--) {\r\n    newStr += str[i]\r\n}\r\nconsole.log(newStr)"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "tenalp",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "// Find largest in an array\r\nlet arr = [1,2,4,1,5,6]\r\nlet max = arr[0]\r\nfor (let i = 1; i <= arr.length - 1; i++) {\r\n    if (arr[i] > max) {\r\n        max = arr[i]\r\n    }\r\n}\r\nconsole.log(max)"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "6",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "// Find second largest in an array\r\nlet arr = [1,2,4,1,5,6]\r\nlet max = arr[0]\r\nlet secondMax = arr[0]\r\n\r\nfor (i = 0; i <= arr.length - 1; i++) {\r\n    if (arr[i] > max) {\r\n        secondMax = max\r\n        max = arr[i]\r\n    }\r\n    else if (arr[i] > secondMax && arr[i] < max) {\r\n        secondMax = arr[i]\r\n    }\r\n}\r\nconsole.log(secondMax)"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "5",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        }
+    ]
+}
