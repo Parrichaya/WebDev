@@ -91,7 +91,186 @@
         {
             "language": "javascript",
             "source": [
-                "// Balanced Parenthesis"
+                "// Balanced Parenthesis\r\nconst isValid = (s) => {\r\n    const brackets = {'(':')','{':'}','[':']'}\r\n    let stack = []\r\n\r\n    for (let i = 0; i < s.length; i++) {\r\n        if (brackets[s[i]]) {\r\n            stack.push(s[i])\r\n        }\r\n        else if (stack.length === 0 || s[i] !== brackets[stack.pop()]) {\r\n            return false\r\n        }\r\n        }\r\n        return stack.length === 0\r\n    }    \r\n\r\nlet s = '(())({})'\r\nconsole.log(isValid(s)) "
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "true",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "// Arrow Function and ternery operator\r\nconst convertTemp = (value,unit) => (unit === 'K') ? value + 273 : value - 273           // using ternery operator\r\n\r\nlet unit = 'K'\r\nlet value = 300\r\nconsole.log(convertTemp(value,unit))"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "573",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "// Class and Inheritance\r\n\r\nclass user {                                    // user class\r\n    static count                                // static variable\r\n    constructor(username,email,password) {      // constructor for user class\r\n        this.username = username\r\n        this.email = email\r\n        this.password = password\r\n        user.count++\r\n    }\r\n\r\n    printNumberOfUsers() {                      // class method\r\n        console.log(\"The number of users = \",user.count)\r\n    }\r\n}\r\n/**************************************************************************************** */\r\nclass member extends user {                     // new member class inheriting user class\r\n    constructor(username,email,password) {\r\n        super(username,email,password)\r\n        this.membershipactivetilldate = new Date(2024,2,8)\r\n        this.package = ''\r\n    }\r\n\r\n    purchaseMembership(membershippackagename) {         // class method\r\n        if(membershippackagename === 'MONTHLYPACKAGE') {\r\n          this.membershipactivetilldate.setMonth(this.membershipactivetilldate.getMonth() + 1)\r\n          this.package = 'MONTHLYPACKAGE'\r\n        } else {\r\n          this.membershipactivetilldate.setFullYear(this.membershipactivetilldate.getFullYear() + 1)\r\n          this.package = 'YEARLYPACKAGE'\r\n        }\r\n      }\r\n\r\n    subscriptionActiveTill() {                          // class method\r\n        console.log(this.username + \" is subscribed to \" + this.package + \" uptill \" + this.membershipactivetilldate.toDateString())\r\n    }\r\n}    \r\n/***************************************************************************************** */\r\nfunction createNewStudents(username, email, password, membershippackagename) {              // function\r\n    const mike = new member(username, email, password);  \r\n    mike.purchaseMembership(membershippackagename);\r\n    mike.subscriptionActiveTill();\r\n}\r\n\r\nlet membershippackagename = 'YEARLYPACKAGE'\r\nlet username = 'Mohan'\r\nlet email = 'mohan@gmail.com'\r\nlet password = 'fgfggdj'\r\ncreateNewStudents(username, email, password, membershippackagename)"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Mohan is subscribed to YEARLYPACKAGE uptill Sat Mar 08 2025",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                ""
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                ""
             ],
             "outputs": []
         }
