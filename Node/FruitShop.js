@@ -42,13 +42,13 @@ for (let i = 0; i < evenfruit.length; i++) {
 const mainHeading = document.querySelector("#main-heading")
 mainHeading.style.textAlign = "right"
 
-const fruits = document.querySelector(".fruits")
-fruits.style.backgroundColor = "gray"
-fruits.style.padding = "30px"
-fruits.style.margin = "30px"
-fruits.style.width = "50%"
-fruits.style.borderadRadius = "5px"
-fruits.style.listStyleType = "none"
+const fruitss = document.querySelector(".fruits")
+fruitss.style.backgroundColor = "gray"
+fruitss.style.padding = "30px"
+fruitss.style.margin = "30px"
+fruitss.style.width = "50%"
+fruitss.style.borderadRadius = "5px"
+fruitss.style.listStyleType = "none"
 
 const fruitItems = document.querySelectorAll(".fruit")
 for (let i = 0; i < fruitItems.length; i++) {
@@ -56,3 +56,29 @@ for (let i = 0; i < fruitItems.length; i++) {
     fruitItems[i].style.margin = "10px"
     fruitItems[i].style.borderadRadius = "5px"
 }
+
+const paraH3 = document.createElement('h3')
+const paraTextH3 = document.createTextNode('Buy high quality organic fruits online')
+paraH3.appendChild(paraTextH3)
+
+const paraP = document.createElement('p')
+const paraTextP = document.createTextNode('Total fruits: 4')
+paraP.appendChild(paraTextP)
+
+const divs = document.getElementsByTagName('div')
+const firstDiv = divs[0]
+const secondDiv = divs[1]
+firstDiv.appendChild(paraH3).style.fontStyle = 'italic'
+
+const fruits = document.querySelector('.fruits')
+secondDiv.insertBefore(paraP,fruits)
+
+paraP.id = 'fruits-total'
+
+// Parent,child & siblings
+const ul = document.querySelector('.fruits')
+ul.style.backgroundColor = 'magenta'
+
+ul.parentElement.style.backgroundColor = 'yellow'           // parent
+ul.children[2].style.color = 'blue'                         // child
+ul.previousElementSibling.style.color = 'red'               // sibling
