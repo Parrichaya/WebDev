@@ -1,0 +1,14 @@
+form{
+    background-color: indianred;
+    padding: 25px
+  }
+  
+  label[for="name"]{
+    height: 25px;
+    font-style: italic
+  }
+
+  .btn{
+    margin-top: 25px;
+    padding: 10px
+  }
