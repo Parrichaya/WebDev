@@ -151,37 +151,121 @@
         {
             "language": "javascript",
             "source": [
-                "// DOM manipulation\r\n"
+                "var arr = [1, 2,3,5]\r\n\r\nvar newArr = arr.forEach((item, i ) => {\r\n\r\nconsole.log(item + 'index' + i)\r\n\r\nreturn item + i\r\n\r\n})\r\n\r\nprint(console.log(newArr))"
             ],
-            "outputs": []
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "1index0",
+                                "2index1",
+                                "3index2",
+                                "5index3",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.error",
+                            "value": {
+                                "name": "ReferenceError",
+                                "message": "print is not defined",
+                                "stack": "    at <Cell 9> [11, 5]\n    at <Cell 9> [9, 46]\n    at Script.runInContext (node:vm:133:12)\n    at Script.runInNewContext (node:vm:138:17)\n    at Object.runInNewContext (node:vm:296:38)\n    at C (c:\\Users\\parri\\.vscode\\extensions\\donjayamanne.typescript-notebook-2.0.6\\out\\extension\\server\\index.js:2:113345)\n    at t.execCode (c:\\Users\\parri\\.vscode\\extensions\\donjayamanne.typescript-notebook-2.0.6\\out\\extension\\server\\index.js:2:114312)\n    at k.<anonymous> (c:\\Users\\parri\\.vscode\\extensions\\donjayamanne.typescript-notebook-2.0.6\\out\\extension\\server\\index.js:2:142156)\n    at k.emit (node:events:518:28)\n    at k.emit (node:domain:488:12)"
+                            }
+                        }
+                    ]
+                }
+            ]
         },
         {
             "language": "javascript",
             "source": [
-                ""
+                "const a = 10;\r\n\r\n{\r\n\r\nconst a = 20;\r\n\r\n{\r\n\r\nconsole.log(a);\r\n\r\n}\r\n\r\nconsole.log(a)\r\n\r\n}\r\n\r\nconsole.log(a)"
             ],
-            "outputs": []
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "20",
+                                "20",
+                                "10",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
         },
         {
             "language": "javascript",
             "source": [
-                ""
+                "let b = 8\r\nfunction a() {\r\n    let b = 1\r\n    function y() {\r\n    let b = 2\r\n    function x() {\r\n        let b = 5\r\n        console.log(this.b)\r\n    }\r\n    x()\r\n}\r\ny()\r\n}\r\na()"
             ],
-            "outputs": []
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "8",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
         },
         {
             "language": "javascript",
             "source": [
-                ""
+                "let b = 8\r\nlet obj = {\r\n    a : 'inherited',\r\n    b : 'arrowed',\r\n    fun : function () {\r\n        console.log(\"'This' can be \" + this.a)\r\n    },\r\n    fun2 : () => {\r\n        console.log(\"'This' is \" + this.b)\r\n    }\r\n}\r\nobj.fun()\r\nobj.fun2()"
             ],
-            "outputs": []
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "'This' can be inherited",
+                                "'This' is 8",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
         },
         {
             "language": "javascript",
             "source": [
-                ""
+                "const name = (arr)=>{\r\n    let i = 0\r\n    return () => {\r\n        if (i < arr.length) {\r\n        console.log('Hello '+arr[i]);\r\n        i++\r\n    }\r\n}\r\n\r\n}\r\n\r\nlet fun = name([\"Ram\",\"Shyam\"]);\r\n\r\nfun()// Print Hello Ram\r\n\r\nfun()//print Hello Shyam\r\n\r\n"
             ],
-            "outputs": []
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Hello Ram",
+                                "Hello Shyam",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
         },
         {
             "language": "javascript",
