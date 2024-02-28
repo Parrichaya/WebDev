@@ -270,63 +270,161 @@
         {
             "language": "javascript",
             "source": [
-                ""
+                "let buyBike = (callback) => {\r\n    setTimeout( () => {\r\n      console.log(\"Bought Royal Enfield Himalayan\");\r\n      callback()\r\n    },2000);\r\n  };\r\n  \r\n  let planTrip = () => {\r\n    setTimeout( () => {\r\n      console.log(\"Trip to Ladakh planned\");\r\n    },1000);\r\n  };\r\n  \r\n  buyBike(planTrip);"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "",
+                                "Bought Royal Enfield Himalayan",
+                                "Trip to Ladakh planned",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "function bookSearchPromise() {\r\n    return new Promise((resolve,reject) => {\r\n      setTimeout(() => {\r\n        const bookSearch = Math.random() > 0.5\r\n        if (bookSearch) {\r\n          resolve(\"Book found\")\r\n        } else {\r\n          reject(\"Book not found\")\r\n        }\r\n      },3000)\r\n    }) \r\n  } \r\n  \r\n  bookSearchPromise()\r\n    .then((result) => {\r\n      console.log(result)\r\n    })\r\n    .catch((error) => {\r\n      console.log(error)\r\n    })"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Book found",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "function buyBike() {\r\n    return new Promise((resolve,reject) => {\r\n      setTimeout(() => {\r\n        resolve(\"Bought Royal Enfield Himalayan\")\r\n      },2000)\r\n    })\r\n  }\r\n  \r\n  function planTrip() {\r\n    return new Promise((resolve,reject) => {\r\n      setTimeout(() => {\r\n        resolve(\"Trip to Ladakh planned\")\r\n      },1000)\r\n    })\r\n  }\r\n  \r\n  function reachLadakh() {\r\n    return new Promise((resolve,reject) => {\r\n      setTimeout(() => {\r\n        resolve(\"Reached Ladakh\")\r\n      },1000)\r\n    })\r\n  }\r\n  \r\n  function visitPangongLake() {\r\n      setTimeout(() => {\r\n        console.log(\"Visited Pangong Lake\")\r\n      },500)\r\n  }\r\n  \r\n  buyBike().then((result) => {\r\n    console.log(result)\r\n    planTrip().then((result) => {\r\n      console.log(result)\r\n      reachLadakh().then((result) => {\r\n        console.log(result)\r\n        visitPangongLake()\r\n      })\r\n    })\r\n  })"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Bought Royal Enfield Himalayan",
+                                "",
+                                "Trip to Ladakh planned",
+                                "Reached Ladakh",
+                                "Visited Pangong Lake",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "function checkWeather() {\r\n    return new Promise((resolve,reject) => {\r\n      setTimeout(() => {\r\n        let goodWeather = Math.random() > 0.5\r\n        if (goodWeather) {\r\n          resolve(\"Let us go for picnic\")\r\n        } else {\r\n          reject(\"Error: It is cloudy\")\r\n        }\r\n      },3000)\r\n    })\r\n  }\r\n  \r\n  checkWeather()\r\n    .then((result) => {\r\n      console.log(result)\r\n    })\r\n    .catch((error) => {\r\n      console.log(error)\r\n    })"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Let us go for picnic",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "function orderFood() {\r\n    return new Promise((resolve,reject) => {\r\n      setTimeout(() => {\r\n        let foodDelivered = true\r\n        if (foodDelivered) {\r\n          resolve(\"Food delivered\")\r\n        } else {\r\n          reject(\"Food not delivered\")\r\n        }\r\n      },2000)\r\n    })\r\n  }\r\n\r\nfunction orderDessert() {\r\n    return new Promise((resolve,reject) => {\r\n      setTimeout(() => {\r\n        let dessertDelivered = true\r\n        if (dessertDelivered) {\r\n          resolve(\"Dessert delivered\")\r\n        } else {\r\n          reject(\"Dessert not delivered\")\r\n        }\r\n      },2000)\r\n    })\r\n  }\r\n\r\norderFood()\r\n  .then((foodMsg) => {\r\n    console.log(foodMsg)\r\n    return orderDessert()\r\n  })\r\n  .then((dessertMsg) => {\r\n    console.log(dessertMsg)\r\n    console.log(\"Dream Meal fulfilled\")\r\n  })\r\n  .catch((error) => {\r\n    console.log(error)\r\n    console.log(\"Dream Meal failed\")\r\n  })"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Food delivered",
+                                "Dream Meal fulfilled",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "function checkCar() {\r\n    return new Promise((resolve,reject) => {\r\n      setTimeout(() => {\r\n        let carReady = Math.random() > 0.5\r\n        if (carReady) {\r\n          resolve(\"Car is ready\")\r\n        } else {\r\n          reject(\"Error: Car needs maintenance\")\r\n        }\r\n      },2000)\r\n    })\r\n  }\r\n  \r\n  function packForPicnic() {\r\n    return new Promise((resolve,reject) => {\r\n      setTimeout(() => {\r\n        let picnicReady = Math.random() > 0.5\r\n        if (picnicReady) {\r\n          resolve(\"Packed everything for picnic\")\r\n        } else {\r\n          reject(\"Error: Not have some essentials\")\r\n        }\r\n      },1000)\r\n    })\r\n  }\r\n  \r\n  checkCar()\r\n    .then((carMsg) => {\r\n      console.log(carMsg)\r\n      return packForPicnic()\r\n    })\r\n    .then((picnicMsg) => {\r\n      console.log(picnicMsg)\r\n      console.log(\"Go for picnic\")\r\n    })\r\n    .catch((error) => {\r\n      console.log(error)\r\n      console.log(\"Picnic cancelled\")\r\n    })"
+            ],
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Car is ready",
+                                "Packed everything for picnic",
+                                "Go for picnic",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "const projectorPromise = new Promise((resolve,reject) => {\r\n  setTimeout(() => {\r\n    const projectorInStock = Math.random() > 0.5\r\n    if (projectorInStock) {\r\n      resolve(\"Projector rented successfully\")\r\n    } else {\r\n      reject(\"Error: Projectors out of stock\")\r\n    }\r\n  },1000)\r\n})\r\n\r\nconst pizzasPromise = new Promise((resolve,reject) => {\r\n  setTimeout(() => {\r\n    const pizzaReady = Math.random() > 0.5\r\n    if (pizzaReady) {\r\n      resolve(\"Pizzas delivered at time\")\r\n    } else {\r\n      reject(\"Error: Pizzas not delivered on time\")\r\n    }\r\n  },2000)\r\n})\r\n\r\nconst friendsPromise = new Promise((resolve,reject) => {\r\n  setTimeout(() => {\r\n    const friendsPresent = Math.random() > 0.5\r\n    if (friendsPresent) {\r\n      resolve(\"Both friends available\")\r\n    } else {\r\n      reject(\"Error: Both friends not available\")\r\n    }\r\n  },3000)\r\n})\r\n\r\nPromise.all(projectorPromise,pizzasPromise,friendsPromise)\r\n  .then((results) => {\r\n    console.log(results)\r\n  })\r\n  .catch((error) => {\r\n    console.log(error)\r\n  })"
             ],
             "outputs": []
         },
         {
             "language": "javascript",
             "source": [
-                ""
+                "async function boardingBus() {\r\n    try {\r\n      // Write your code here\r\n      function boardBusAt10() {\r\n        return new Promise((resolve, reject) => {\r\n          setTimeout(() => {\r\n            const busArrivesAt10 = Math.random() > 0.5;\r\n            if (busArrivesAt10) {\r\n              resolve(\"Board the bus\");\r\n            } else {\r\n              reject(\"Error: Bus is late\");\r\n            }\r\n          }, 3000);\r\n        });\r\n      }\r\n  \r\n      const step1 = await boardBusAt10()\r\n      console.log(step1)\r\n    } catch (error) {\r\n      console.log(error);\r\n    }\r\n  }\r\n  \r\n  boardingBus();"
             ],
-            "outputs": []
+            "outputs": [
+                {
+                    "items": [
+                        {
+                            "mime": "application/vnd.code.notebook.stdout",
+                            "value": [
+                                "Board the bus",
+                                "",
+                                ""
+                            ]
+                        }
+                    ]
+                }
+            ]
         },
         {
             "language": "javascript",
             "source": [
-                ""
-            ],
-            "outputs": []
-        },
-        {
-            "language": "javascript",
-            "source": [
-                ""
-            ],
-            "outputs": []
-        },
-        {
-            "language": "javascript",
-            "source": [
-                ""
-            ],
-            "outputs": []
-        },
-        {
-            "language": "javascript",
-            "source": [
-                ""
-            ],
-            "outputs": []
-        },
-        {
-            "language": "javascript",
-            "source": [
-                ""
-            ],
-            "outputs": []
-        },
-        {
-            "language": "javascript",
-            "source": [
-                ""
-            ],
-            "outputs": []
-        },
-        {
-            "language": "javascript",
-            "source": [
-                ""
+                "console.log('start');\r\nconst promise1 = Promise.resolve().then(() => {\r\n  console.log('promise1');\r\n  const timer2 = setTimeout(() => {\r\n    console.log('timer2')\r\n  }, 0)\r\n});\r\nconst timer1 = setTimeout(() => {\r\n  console.log('timer1')\r\n  const promise2 = Promise.resolve().then(() => {\r\n    console.log('promise2')\r\n  })\r\n}, 0)\r\nconsole.log('end')"
             ],
             "outputs": []
         },

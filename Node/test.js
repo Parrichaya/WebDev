@@ -65,18 +65,38 @@
 // a()
 ////////////////////////////////////////////////////////////////////////
 
-const name = (arr)=>{
-    let i = 0
-        return () => {
-        if (i < arr.length) {
-        console.log('Hello '+arr[i]);
-        i++
-    }
-}
-}
+// const name = (arr)=>{
+//     let i = 0
+//         return () => {
+//         if (i < arr.length) {
+//         console.log('Hello '+arr[i]);
+//         i++
+//     }
+// }
+// }
 
-let fun = name(["Ram","Shyam"]);
+// let fun = name(["Ram","Shyam"]);
 
-fun()// Print Hello Ram
+// fun()// Print Hello Ram
 
-fun()//print Hello Shyam
+// fun()//print Hello Shyam
+
+let buyBike = (callback) => {
+    setTimeout( () => {
+      console.log("Bought Royal Enfield Himalayan");
+      callback()
+    },2000);
+  };
+  
+  let planTrip = () => {
+    setTimeout( () => {
+      console.log("Trip to Ladakh planned");
+    },1000);
+  };
+  
+  buyBike(planTrip);
+
+
+  console.log("Let's rock!")
+  console.log("hello")
+  
