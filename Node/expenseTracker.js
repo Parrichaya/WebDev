@@ -3,6 +3,7 @@ function handleFormSubmit(event) {
     const amount = event.target.amount.value;
     const description = event.target.description.value;
     const category = event.target.category.value;  
+    
     const ExpenseDetails = {
     amount: amount,
     description: description,
