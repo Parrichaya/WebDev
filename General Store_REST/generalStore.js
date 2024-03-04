@@ -1,3 +1,5 @@
+const url = "https://crudcrud.com/api/1a20f6a1c7d341efaab1bb1a68ae7e34/storeData"
+
 function handleFormSubmit(event) {
     event.preventDefault();
     const itemDetails = {
@@ -7,34 +9,30 @@ function handleFormSubmit(event) {
       quantity: event.target.quantity.value,
     };
     axios
-      .post(
-        "https://crudcrud.com/api/6c77d6978b5d4079905f54da35cef1a5/storeData",
-        itemDetails
-      )
+      .post(url, itemDetails)
       .then((response) => {
-        itemDetails.id = response.data._id;
-        displayItemOnScreen(itemDetails)
+        displayItemOnScreen(response.data)
       })
       .catch((error) => console.log(error));
   
     event.target.reset();
   }
   
-  // window.addEventListener("DOMContentLoaded", () => {
-  //   axios
-  //       .get("https://crudcrud.com/api/6c77d6978b5d4079905f54da35cef1a5/storeData")
-  //       .then((response) => {
-  //           for (var i = 0; i < response.data.length; i++) {
-  //               displayItemOnScreen(response.data[i]);
-  //           }
-  //       })
-  //       .catch((error) => console.log(error));
-  // })
+  window.addEventListener("DOMContentLoaded", () => {
+    axios
+        .get(url)
+        .then((response) => {
+            for (var i = 0; i < response.data.length; i++) {
+                displayItemOnScreen(response.data[i]);
+            }
+        })
+        .catch((error) => console.log(error));
+  })
 
 function displayItemOnScreen(itemDetails) {
   const item = document.createElement("li");
   const itemTextNode = document.createTextNode(
-    `${itemDetails.itemname} - ${itemDetails.description} - ${itemDetails.price} - ${itemDetails.quantity}`
+    `${itemDetails.itemname} - ${itemDetails.description} - ${itemDetails.price} - ${itemDetails.quantity} `
   );
   item.appendChild(itemTextNode);
 
@@ -42,16 +40,34 @@ function displayItemOnScreen(itemDetails) {
   itemList.appendChild(item);
 
   const buyOneBtn = document.createElement("button");
+  buyOneBtn.className = "btn btn-sm btn-outline-success";
   buyOneBtn.appendChild(document.createTextNode("Buy 1"));
   item.appendChild(buyOneBtn);
 
   buyOneBtn.addEventListener("click", function () {
-    updateQuantity(itemDetails, 1,itemTextNode);
+    updateQuantity(itemDetails, 1, itemTextNode);
+  });
+
+  const buyTwoBtn = document.createElement("button");
+  buyTwoBtn.className = "btn btn-sm btn-outline-success";
+  buyTwoBtn.appendChild(document.createTextNode("Buy 2"));
+  item.appendChild(buyTwoBtn);
+
+  buyTwoBtn.addEventListener("click", function () {
+    updateQuantity(itemDetails, 2, itemTextNode);
+  });
+
+  const buyThreeBtn = document.createElement("button");
+  buyThreeBtn.className = "btn btn-sm btn-outline-success";
+  buyThreeBtn.appendChild(document.createTextNode("Buy 3"));
+  item.appendChild(buyThreeBtn);
+
+  buyThreeBtn.addEventListener("click", function () {
+    updateQuantity(itemDetails, 3, itemTextNode);
   });
 }
 
-function updateQuantity(itemDetails, quantity,itemTextNode) {
-
+function updateQuantity(itemDetails, quantity, itemTextNode) {
   itemDetails.quantity -= quantity;
   if (itemDetails.quantity < 0) {
     itemDetails.quantity = 0;
@@ -59,13 +75,16 @@ function updateQuantity(itemDetails, quantity,itemTextNode) {
 
   console.log("Updating quantity:", itemDetails, quantity);
   axios
-    .put(
-      "https://crudcrud.com/api/6c77d6978b5d4079905f54da35cef1a5/storeData/" + itemDetails.id,
-      itemDetails
+    .put(`${url}/${itemDetails._id}`,
+      {
+        itemname: itemDetails.itemname,
+        description: itemDetails.description,
+        price: itemDetails.price,
+        quantity: itemDetails.quantity,
+      }
     )
     .then((response) => {
-      console.log("PUT request successful:", response.data);
-      // Update the quantity on the screen
+      console.log("PUT request successful:", response.data);     
       itemTextNode.nodeValue = `${itemDetails.itemname} - ${itemDetails.description} - ${itemDetails.price} - ${itemDetails.quantity}`;
     })
     .catch((error) => {
