@@ -8,116 +8,69 @@ function handleFormSubmit(event) {
     };
     axios
       .post(
-        "https://crudcrud.com/api/4607c921805b4e2fbf0272b89751ea27/storeData",
+        "https://crudcrud.com/api/6c77d6978b5d4079905f54da35cef1a5/storeData",
         itemDetails
       )
-      .then((response) => displayItemOnScreen(response.data))
+      .then((response) => {
+        itemDetails.id = response.data._id;
+        displayItemOnScreen(itemDetails)
+      })
       .catch((error) => console.log(error));
   
     event.target.reset();
   }
   
-  window.addEventListener("DOMContentLoaded", () => {
-    axios
-        .get("https://crudcrud.com/api/4607c921805b4e2fbf0272b89751ea27/storeData")
-        .then((response) => {
-            for (var i = 0; i < response.data.length; i++) {
-                displayItemOnScreen(response.data[i]);
-            }
-        })
-        .catch((error) => console.log(error));
-  })
+  // window.addEventListener("DOMContentLoaded", () => {
+  //   axios
+  //       .get("https://crudcrud.com/api/6c77d6978b5d4079905f54da35cef1a5/storeData")
+  //       .then((response) => {
+  //           for (var i = 0; i < response.data.length; i++) {
+  //               displayItemOnScreen(response.data[i]);
+  //           }
+  //       })
+  //       .catch((error) => console.log(error));
+  // })
 
-
-  
- function displayItemOnScreen(itemDetails) {
+function displayItemOnScreen(itemDetails) {
   const item = document.createElement("li");
-  item.appendChild(
-    document.createTextNode(
-      `${itemDetails.itemname} - ${itemDetails.description} - ${itemDetails.price} - ${itemDetails.quantity}`
-    )
+  const itemTextNode = document.createTextNode(
+    `${itemDetails.itemname} - ${itemDetails.description} - ${itemDetails.price} - ${itemDetails.quantity}`
   );
+  item.appendChild(itemTextNode);
 
   const itemList = document.querySelector("ul");
   itemList.appendChild(item);
 
   const buyOneBtn = document.createElement("button");
   buyOneBtn.appendChild(document.createTextNode("Buy 1"));
-   buyOneBtn.addEventListener("click", function() {
-    itemDetails.quantity -= 1;
-    if (itemDetails.quantity < 0) {
-      itemDetails.quantity = 0;
-    }
-    axios
-      .put(
-        "https://crudcrud.com/api/4607c921805b4e2fbf0272b89751ea27/storeData/" + itemDetails._id,
-        itemDetails
-      )
-      .then((response) => {
-        // Update the quantity on the screen
-        item.textContent = `${itemDetails.itemname} - ${itemDetails.description} - ${itemDetails.price} - ${itemDetails.quantity}`;
-      })
-      .catch((error) => console.log(error));
-  });
   item.appendChild(buyOneBtn);
 
-  const buyTwoBtn = document.createElement("button");
-  buyTwoBtn.appendChild(document.createTextNode("Buy 2"));
-   buyTwoBtn.addEventListener("click", function() {
-    itemDetails.quantity -= 2;
-    if (itemDetails.quantity < 0) {
-      itemDetails.quantity = 0;
-    }
-    axios
-      .put(
-        "https://crudcrud.com/api/4607c921805b4e2fbf0272b89751ea27/storeData/" + itemDetails._id,
-        itemDetails
-      )
-      .then((response) => {
-        // Update the quantity on the screen
-        item.textContent = `${itemDetails.itemname} - ${itemDetails.description} - ${itemDetails.price} - ${itemDetails.quantity}`;
-      })
-      .catch((error) => console.log(error));
+  buyOneBtn.addEventListener("click", function () {
+    updateQuantity(itemDetails, 1,itemTextNode);
   });
-  item.appendChild(buyTwoBtn);
-
-  const buyThreeBtn = document.createElement("button");
-  buyThreeBtn.appendChild(document.createTextNode("Buy 3"));
-   buyThreeBtn.addEventListener("click", function() {
-    itemDetails.quantity -= 3;
-    if (itemDetails.quantity < 0) {
-      itemDetails.quantity = 0;
-    }
-    axios
-      .put(
-        "https://crudcrud.com/api/4607c921805b4e2fbf0272b89751ea27/storeData/" + itemDetails._id,
-        itemDetails
-      )
-      .then((response) => {
-        // Update the quantity on the screen
-        item.textContent = `${itemDetails.itemname} - ${itemDetails.description} - ${itemDetails.price} - ${itemDetails.quantity}`;
-      })
-      .catch((error) => console.log(error));
-  });
-  item.appendChild(buyThreeBtn);
 }
 
-function updateQuantity(itemDetails, quantity,ite) {
+function updateQuantity(itemDetails, quantity,itemTextNode) {
+
   itemDetails.quantity -= quantity;
   if (itemDetails.quantity < 0) {
     itemDetails.quantity = 0;
   }
 
+  console.log("Updating quantity:", itemDetails, quantity);
   axios
     .put(
-      "https://crudcrud.com/api/4607c921805b4e2fbf0272b89751ea27/storeData/" + itemDetails._id,
+      "https://crudcrud.com/api/6c77d6978b5d4079905f54da35cef1a5/storeData/" + itemDetails.id,
       itemDetails
     )
     .then((response) => {
+      console.log("PUT request successful:", response.data);
       // Update the quantity on the screen
-      item.textContent = `${itemDetails.itemname} - ${itemDetails.description} - ${itemDetails.price} - ${itemDetails.quantity}`;
+      itemTextNode.nodeValue = `${itemDetails.itemname} - ${itemDetails.description} - ${itemDetails.price} - ${itemDetails.quantity}`;
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log("PUT request failed:", error);
+    });
 }
    
   
