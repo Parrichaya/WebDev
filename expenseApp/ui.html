@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </head>
+  <body style="margin: 0px">
+    <div class="container">
+    <nav class="navbar navbar-dark bg-dark">
+        <span class="navbar-brand h1 d-flex justify-content-center w-100">Expense Tracker</span>
+      </nav><br>
+      <div class="row">
+        <div class="col-md-4">
+          <form onsubmit="handleFormSubmit(event)">
+            <div class="form-group mb-1">
+              <input type="number" name="amount" id="amount" class="form-control" placeholder="Amount"/>
+            </div>
+            <div class="form-group mb-1">
+              <input type="text" name="description" id="description" class="form-control" placeholder="Description"/>
+            </div>
+            <div class="form-group mb-2">
+              <select name="category" id="category" class="form-select" placeholder="Category">
+                <option value="travel">Travel</option>
+                <option value="food">Food</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="shopping">Shopping</option>
+              </select>
+            </div>
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-success">Add Expense</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <ul></ul>
+  </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"></script>
+    <script src="ui.js"></script>
+</html>
