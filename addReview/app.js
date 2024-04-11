@@ -17,7 +17,7 @@ app.use('/review', reviewRoutes);
 
 sequelize.sync()
     .then(() => {
-        console.log('Table created successfully!');
+        console.log('Table created!');
         app.listen(5000);
     })
     .catch(err => console.log(err))
