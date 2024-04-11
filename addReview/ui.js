@@ -24,6 +24,7 @@ function handleSearch(event) {
     event.preventDefault();
     const company_name = event.target.company_name.value;
     console.log('Search button clicked!'); 
+    
     axios   
         .post("http://localhost:5000/review/search-company", {company_name: company_name})
         .then((response) => {

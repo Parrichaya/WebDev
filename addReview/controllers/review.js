@@ -25,7 +25,7 @@ exports.searchCompany = (req, res, next) => {
     Review.findAll({ where: {company_name},attributes: ['pros', 'cons', 'rating'] })
         .then((reviews) => {
             if (reviews.length === 0) {
-                res.status(404).json({ message: "No reviews found" });
+                res.status(404).json({ message: "No reviews found." });
             } else {
                 res.status(200).json({ company_name, reviews: reviews });
             }
