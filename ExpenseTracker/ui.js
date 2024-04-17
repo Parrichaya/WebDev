@@ -13,7 +13,9 @@ function signup(event) {
         console.log(response)
       })
       .catch((err) => {
-        document.body.innerHTML += `<h4 style="color:red;">${err.response.data.message}</h4>`
+        const errorMessage = document.getElementById('error-message');
+        errorMessage.textContent = '';
+        errorMessage.textContent = err.response.data.message;
       })
    
     document.getElementById("username").value = "";
@@ -34,9 +36,14 @@ function login(event) {
         "http://localhost:5000/user/login", loginDetails)
       .then((response) => {
         console.log(response)
+        if (response.data.message === "Login Successful!") {
+          alert("User logged in successfully!");
+        }
       })
       .catch((err) => {
-        document.body.innerHTML += `<h4 style="color:red;">${err.response.data.message}</h4>`
+        const errorMessage = document.getElementById('error-message');
+        errorMessage.textContent = '';
+        errorMessage.textContent = err.response.data.message;
       })
     document.getElementById("email").value = "";
     document.getElementById("password").value = "";
