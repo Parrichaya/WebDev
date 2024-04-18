@@ -2,6 +2,12 @@ const User = require("../models/user");
 
 const bcrypt = require('bcrypt');
 
+const jwt = require('jsonwebtoken');
+
+function createToken(id,username) {
+    return jwt.sign({userId: id, username: username}, 'secretkey');
+}
+
 exports.loginUser = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -25,7 +31,7 @@ exports.loginUser = (req, res, next) => {
                 });
             } else {
                 return res.status(200).json({
-                    message: "Login Successful!",
+                    message: "Login Successful!", token: createToken(user.id, user.username)
                 })
             }
         })

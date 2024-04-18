@@ -18,6 +18,12 @@ app.use('/user', userRoutes);
 const expenseRoutes = require('./routes/expense');
 app.use('/expense', expenseRoutes);
 
+const User = require('./models/user');
+const Expense = require('./models/expense');
+
+User.hasMany(Expense);
+Expense.belongsTo(User);
+
 sequelize.sync()
     .then(() => {
         console.log('Table created!');

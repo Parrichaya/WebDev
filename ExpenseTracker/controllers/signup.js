@@ -21,7 +21,7 @@ exports.addUser = (req, res, next) => {
         })
         .then((newUser) => {
             console.log('User added!');
-            res.status(201).json({newUserDetail: newUser});
+            res.status(201).json({message: "User added!"});
         })
         .catch((err) => {
             if(err.name === "SequelizeUniqueConstraintError") {

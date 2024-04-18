@@ -2,3 +2,9 @@
     text-align: center; /* Center the text */
     color: red; /* Set the error message color */
 }
+
+.list-group {
+    width: 400px;
+    margin-top: 60px;
+    margin-left: 100px;
+}

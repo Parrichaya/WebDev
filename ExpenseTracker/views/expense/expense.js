@@ -8,10 +8,10 @@ function expenseform(event) {
       }
     axios
       .post(
-        "http://localhost:5000/expense/add-expense", expenseDetails)
+        "http://localhost:5000/expense/add-expense", expenseDetails, { headers: { "Authorization": localStorage.getItem("token") } })
       .then((response) => {
         console.log(response)
-        displayUserOnScreen(response.data.newExpenseDetail)
+        displayExpensesOnScreen(response.data.newExpenseDetail)
       })
       .catch((error) => console.log(error));
   
@@ -22,35 +22,44 @@ function expenseform(event) {
   }
   
   window.addEventListener("DOMContentLoaded", () => {
+    const token = localStorage.getItem("token");
     axios
-        .get("http://localhost:5000/expense/get-expenses")
+        .get("http://localhost:5000/expense/get-expenses", { headers: { "Authorization": token } })
         .then((response) => {
             for (var i = 0; i < response.data.allExpenses.length; i++) {
-                displayUserOnScreen(response.data.allExpenses[i]);
+                displayExpensesOnScreen(response.data.allExpenses[i]);
             }
         })
         .catch((error) => console.log(error));
   })
 
-  function displayUserOnScreen(expenseDetails) {
+// Display expenses on screen
+function displayExpensesOnScreen(expenseDetails) {
+    const expensesList = document.getElementById("expenses")
+    expensesList.classList.add("list-group"); 
+
+    // Create a list item for the current expense
     const expenseItem = document.createElement("li");
-    expenseItem.appendChild(
-      document.createTextNode(
-        `${expenseDetails.amount} - ${expenseDetails.description} - ${expenseDetails.category}`
-      )
-    );
-  
-    const deleteBtn = document.createElement("button");
-    deleteBtn.appendChild(document.createTextNode("Delete"));
-    expenseItem.appendChild(deleteBtn);
-  
-    const expenseList = document.querySelector("ul");
-    expenseList.appendChild(expenseItem);
+    expenseItem.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center"); 
+
+    expenseItem.innerHTML = `
+        <span>₹${expenseDetails.amount}</span>
+        <span>${expenseDetails.description}</span>
+        <span>${expenseDetails.category}</span>
+        <button class="btn btn-secondary delete-btn">Delete</button>
+    `;
+
+    expensesList.appendChild(expenseItem);
+
+    const deleteBtn = expenseItem.querySelector(".delete-btn");
 
     deleteBtn.addEventListener("click", (event) => {
-      axios
-        .delete(`http://localhost:5000/expense/delete-expense/${expenseDetails.id}`)
-        .then(() => expenseItem.remove())
-        .catch((error) => console.log(error));
-    })
+        axios
+          .delete(`http://localhost:5000/expense/delete-expense/${expenseDetails.id}`, { headers: { "Authorization": localStorage.getItem("token") } })
+          .then(() => {
+              expenseItem.remove(); 
+          })
+          .catch((error) => console.log(error));
+    });
 }
+

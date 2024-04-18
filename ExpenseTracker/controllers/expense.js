@@ -6,9 +6,9 @@ exports.addExpense = (req, res, next) => {
     const description = req.body.description;
     const category = req.body.category;
 
-    Expense.create({
-        amount: amount,
-        description: description,
+    req.user.createExpense({
+        amount: amount, 
+        description: description, 
         category: category
     })
     .then((newExpense) => {
@@ -20,7 +20,7 @@ exports.addExpense = (req, res, next) => {
 
 // Get all expenses from the database
 exports.getExpenses = (req, res, next) => {
-    Expense.findAll()
+    req.user.getExpenses()
     .then((expenses) => {
         res.status(200).json({allExpenses: expenses});
     })
@@ -30,10 +30,18 @@ exports.getExpenses = (req, res, next) => {
 // Delete an expense from the database
 exports.deleteExpense = (req, res, next) => {
     const expenseId = req.params.id;
-    Expense.destroy({where: {id: expenseId}})
-    .then(() => {
-        console.log('Expense deleted!');
-        res.status(200).json({deletedExpense: expenseId});
+    req.user.getExpenses({where: {id: expenseId}})
+    .then((expenses) => {
+        if (!expenses) {
+            return res.status(404).json({message: 'Expense not found!'});
+        }
+        const expenseToBeDeleted = expenses[0];
+        expenseToBeDeleted.destroy()
+        .then(() => {
+            console.log('Expense deleted!');
+            res.status(200).json({deletedExpense: expenseId});
+        })
+        .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
 }

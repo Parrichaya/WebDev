@@ -10,10 +10,9 @@ function login(event) {
         "http://localhost:5000/user/login", loginDetails)
       .then((response) => {
         console.log(response)
-        if (response.data.message === "Login Successful!") {
-          alert("User logged in successfully!");
-          window.location.href = "C:/Users/parri/OneDrive/Documents/GitHub/WebDev/ExpenseTracker/views/expense/expense.html";
-        }
+        alert(response.data.message)
+        localStorage.setItem("token", response.data.token)
+        window.location.href = "../expense/expense.html";
       })
       .catch((err) => {
         const errorMessage = document.getElementById('error-message');
