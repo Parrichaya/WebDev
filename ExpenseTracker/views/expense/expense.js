@@ -120,8 +120,8 @@ buyPremiumBtn.addEventListener("click", (event) => {
         leaderboardContainer.innerHTML = '';
         leaderboardContainer.innerHTML += '<h5>Leaderboard</h5>';
 
-        leaderboardData.forEach((entry, index) => {
-          leaderboardContainer.innerHTML += `<li>${index + 1}. ${entry.username} - ₹${entry.totalAmount}</li>`;
+        leaderboardData.forEach((user, index) => {
+          leaderboardContainer.innerHTML += `<li>${index + 1}. ${user.username} - ₹${user.totalExpenses}</li>`;
         })          
       })
       .catch((error) => console.log(error));
