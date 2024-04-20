@@ -14,12 +14,16 @@
     <nav class="navbar navbar-dark bg-dark">
         <span class="navbar-brand h1 d-flex justify-content-center w-100">Daily Expense</span>
       </nav><br>
-      <div class="row">
+      <div class="row mb-1">
+        <div class="col-md-12 mb-1 d-flex justify-content-center align-items-start">
+            <button id="rzp-button" class="btn btn-primary buy-premium-btn" style="display: none;">Buy Premium</button>
+            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        </div>
         <div class="col-md-4">
           <form onsubmit="expenseform(event)">
             <div class="form-group mb-1">
             <label for="amount">Enter expense amount:</label>
-              <input type="text" name="amount" id="amount" class="form-control" required/>
+              <input type="number" name="amount" id="amount" class="form-control" required/>
             </div>
             <div class="form-group mb-1">
             <label for="description">Enter description:</label>
@@ -39,7 +43,7 @@
             </div>
           </form>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-1">
             <ul id="expenses"></ul>
         </div>
       </div>

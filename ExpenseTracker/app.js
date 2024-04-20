@@ -18,11 +18,18 @@ app.use('/user', userRoutes);
 const expenseRoutes = require('./routes/expense');
 app.use('/expense', expenseRoutes);
 
+const purchaseRoutes = require('./routes/purchase');
+app.use('/purchase', purchaseRoutes);
+
 const User = require('./models/user');
 const Expense = require('./models/expense');
+const Order = require('./models/order');
 
 User.hasMany(Expense);
 Expense.belongsTo(User);
+
+User.hasMany(Order);
+Order.belongsTo(User);
 
 sequelize.sync()
     .then(() => {

@@ -38,3 +38,13 @@ exports.loginUser = (req, res, next) => {
     })
     .catch(err => console.log(err));
 }
+
+exports.checkPremiumStatus = (req, res, next) => {
+    try {
+        const isPremiumUser = req.user.ispremiumuser;
+        res.status(200).json({
+            ispremiumuser: isPremiumUser,
+            message: "User status retrieved"
+        })
+    } catch(err) {console.error(err)}
+}
