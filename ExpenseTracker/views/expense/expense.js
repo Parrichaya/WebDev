@@ -79,6 +79,7 @@ buyPremiumBtn.addEventListener("click", (event) => {
               }, { headers: { "Authorization": localStorage.getItem("token") } })
               .then(() => {
                   alert("You are a Premium User!");
+                  location.reload();
               })
               .catch((error) => {
                   console.log(error);
@@ -108,6 +109,24 @@ buyPremiumBtn.addEventListener("click", (event) => {
     .catch((error) => console.log(error));
   })
 
+  const leaderboardBtn = document.getElementById("leaderboard-btn");
+  leaderboardBtn.addEventListener("click", (event) => {
+    axios
+      .get("http://localhost:5000/premium/leaderboard", { headers: { "Authorization": localStorage.getItem("token") } })
+      .then((response) => {
+        const leaderboardData = response.data.leaderboard;
+
+        const leaderboardContainer = document.getElementById("leaderboard-container");
+        leaderboardContainer.innerHTML = '';
+        leaderboardContainer.innerHTML += '<h5>Leaderboard</h5>';
+
+        leaderboardData.forEach((entry, index) => {
+          leaderboardContainer.innerHTML += `<li>${index + 1}. ${entry.username} - ₹${entry.totalAmount}</li>`;
+        })          
+      })
+      .catch((error) => console.log(error));
+    })
+
 function userPremiumStatus() {
   axios
       .get("http://localhost:5000/user/status", { headers: { "Authorization": localStorage.getItem("token") } })
@@ -116,6 +135,7 @@ function userPremiumStatus() {
 
           if (isPremiumUser) {
               buyPremiumBtn.style.display = "none";
+              leaderboardBtn.style.display = "block";
 
           const premiumMsg = document.createElement("div");
           premiumMsg.classList.add("mb-1", "premium-user-msg");

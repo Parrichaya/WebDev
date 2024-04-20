@@ -21,6 +21,9 @@ app.use('/expense', expenseRoutes);
 const purchaseRoutes = require('./routes/purchase');
 app.use('/purchase', purchaseRoutes);
 
+const premiumRoutes = require('./routes/premium');
+app.use('/premium', premiumRoutes);
+
 const User = require('./models/user');
 const Expense = require('./models/expense');
 const Order = require('./models/order');

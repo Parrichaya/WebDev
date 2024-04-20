@@ -48,3 +48,4 @@ exports.checkPremiumStatus = (req, res, next) => {
         })
     } catch(err) {console.error(err)}
 }
+
