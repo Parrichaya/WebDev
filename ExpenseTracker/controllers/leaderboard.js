@@ -6,14 +6,7 @@ const sequelize = require("../util/database");
 exports.getUserLeaderboard = async (req, res) => {
     try {
         const leaderboard = await User.findAll({
-            attributes: ['username',[sequelize.fn('SUM', sequelize.col('expenses.amount')), 'totalExpenses']],
-            include: [
-                {
-                    model: Expense,
-                    attributes: []
-                },
-            ],
-            group: ['user.id'],
+            attributes: ['username','totalExpenses'],            
             order: [[sequelize.col('totalExpenses'), 'DESC']], 
         });
 

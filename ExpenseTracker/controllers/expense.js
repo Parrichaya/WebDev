@@ -12,8 +12,12 @@ exports.addExpense = (req, res, next) => {
         category: category
     })
     .then((newExpense) => {
-        console.log('Expense added!');
-        res.status(201).json({newExpenseDetail: newExpense});
+        req.user.increment('totalExpenses', { by: parseInt(amount) })
+        .then(() => {
+            console.log('Expense added and total expenses updated!');
+            res.status(201).json({newExpenseDetail: newExpense});
+        })
+        .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
 } 
