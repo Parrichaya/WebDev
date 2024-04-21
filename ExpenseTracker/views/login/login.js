@@ -22,3 +22,28 @@ function login(event) {
     document.getElementById("email").value = "";
     document.getElementById("password").value = "";
 }
+
+const forgotPasswordBtn = document.getElementById("forgot-password-btn");
+const formContainer = document.getElementById("form-block");
+const form = document.getElementById("forgotpassword-form");
+
+forgotPasswordBtn.addEventListener("click", () => {
+    console.log("clicked");
+    formContainer.style.display = "block";
+})
+
+function forgotpassword(event) {
+    event.preventDefault();
+    const email = event.target.email.value;
+    console.log(email);
+
+    axios
+        .post("http://localhost:5000/password/forgotpassword", { email: email })
+        .then((response) => {
+            console.log(response)
+        })
+        .catch((error) => console.log(error))
+
+    formContainer.style.display = "none";
+    form.reset();
+};
