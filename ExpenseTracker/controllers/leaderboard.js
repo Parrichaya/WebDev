@@ -5,9 +5,8 @@ const sequelize = require("../util/database");
 
 exports.getUserLeaderboard = async (req, res) => {
     try {
-        const leaderboard = await User.findAll({
-            attributes: ['username','totalExpenses'],            
-            order: [[sequelize.col('totalExpenses'), 'DESC']], 
+        const leaderboard = await User.findAll({        
+            order: [['totalExpenses', 'DESC']], 
         });
 
         res.status(200).json({ leaderboard });

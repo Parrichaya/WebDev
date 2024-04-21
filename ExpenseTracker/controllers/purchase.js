@@ -26,44 +26,6 @@ exports.purchasepremium = (req, res, next) => {
     .catch(err => console.log(err))
 }
 
-// exports.updateTransactionStatus = (req, res, next) => {
-//     const orderId = req.body.order_id;
-//     const paymentId = req.body.payment_id;
-//     const error = req.body.error;
-
-//     if(error) {
-//         Order.findOne({where: {orderid: orderId}})
-//         .then(order => {
-//             order.update({status: 'FAILED'})
-//             .then(() => {
-//                 return res.status(202).json({
-//                     status: 'success',
-//                     message: 'Payment Failed!'
-//                 })
-//             })
-//             .catch(err => console.log(err))
-//         })
-//         .catch(err => console.log(err))
-//     } else {
-//         Order.findOne({where: {orderid: orderId}})
-//         .then(order => {
-//             order.update({paymentid: paymentId, status: 'SUCCESSFUL'})
-//             .then(() => {
-//                 req.user.update({ispremiumuser: true})
-//                 .then(() => {
-//                     return res.status(202).json({
-//                         status: 'success',
-//                         message: 'Payment Successful!'
-//                     })            
-//                 })
-//                 .catch(err => console.log(err))
-//             })
-//             .catch(err => console.log(err))
-//         })
-//         .catch(err => console.log(err))
-//         }
-//     }
-
 exports.updateTransactionStatus = async (req, res, next) => {
     const { order_id, payment_id, error } = req.body;
     if(error) {
