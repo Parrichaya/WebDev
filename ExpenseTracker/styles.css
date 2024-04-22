@@ -56,3 +56,15 @@
     padding: 30px;
     margin-left: 30px;
 }
+
+/* #forgot-password-btn {
+    position: absolute;
+    top: 480px;
+    right: 610px;
+} */
+
+#form-block {
+    position: absolute;
+    top: 500px;
+    right: 560px;
+}

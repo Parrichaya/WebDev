@@ -30,6 +30,7 @@ app.use('/password', forgotPasswordRoutes);
 const User = require('./models/user');
 const Expense = require('./models/expense');
 const Order = require('./models/order');
+const ForgotPassword = require('./models/forgotpassword');
 
 User.hasMany(Expense);
 Expense.belongsTo(User);
@@ -37,9 +38,12 @@ Expense.belongsTo(User);
 User.hasMany(Order);
 Order.belongsTo(User);
 
+User.hasMany(ForgotPassword);
+ForgotPassword.belongsTo(User);
+
 sequelize.sync()
     .then(() => {
-        console.log('Table created!');
+        console.log('Listening...');
         app.listen(5000);
     })
     .catch(err => console.log(err))
