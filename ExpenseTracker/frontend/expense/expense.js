@@ -127,6 +127,8 @@ buyPremiumBtn.addEventListener("click", (event) => {
       .catch((error) => console.log(error));
     })
 
+const downloadBtn = document.getElementById("download-file-btn");
+
 function userPremiumStatus() {
   axios
       .get("http://localhost:5000/user/status", { headers: { "Authorization": localStorage.getItem("token") } })
@@ -136,6 +138,7 @@ function userPremiumStatus() {
           if (isPremiumUser) {
               buyPremiumBtn.style.display = "none";
               leaderboardBtn.style.display = "block";
+              downloadBtn.style.display = "block";
 
           const premiumMsg = document.createElement("div");
           premiumMsg.classList.add("mb-1", "premium-user-msg");
@@ -149,3 +152,19 @@ function userPremiumStatus() {
 }
 
 userPremiumStatus();
+
+function download() {
+  axios
+    .get("http://localhost:5000/user/download", { headers: { "Authorization": localStorage.getItem("token") } })
+    .then((response) => {
+      if (response.status === 200) {
+        let a = document.createElement("a");
+        a.href = response.data.fileURL;
+        a.download = 'MyExpense.csv';
+        a.click();
+      } else {
+          throw new Error(response.data.message);
+      }
+    })
+    .catch((error) => showError(error));
+}

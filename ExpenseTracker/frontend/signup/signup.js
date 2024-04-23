@@ -11,6 +11,7 @@ function signup(event) {
         "http://localhost:5000/user/signup", signupDetails)
       .then((response) => {
         console.log(response)
+        window.location.href = "../login/login.html";
       })
       .catch((err) => {
         const errorMessage = document.getElementById('error-message');

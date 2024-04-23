@@ -1,5 +1,9 @@
 const Expense = require('../models/expense');
+const FileDownloaded = require('../models/filedownloaded');
 const sequelize = require('../util/database');
+const AWS = require('aws-sdk');
+const UserServices = require('../services/userservices');
+const S3Service = require('../services/S3services');
 
 // Add an expense from the database and update total expenses
 exports.addExpense = async (req, res, next) => {
@@ -60,5 +64,24 @@ exports.deleteExpense = async (req, res, next) => {
         await t.rollback();
         console.log(err);
         res.status(500).json({ error: 'An error occurred.' });
+    }
+}
+
+
+exports.downloadFile = async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+        const expenses = await UserServices.getExpenses(req);
+        const data = JSON.stringify(expenses);
+        const filename = `expenses${userId}${new Date()}.txt`;
+        const fileURL = await S3Service.uploadToS3(data, filename);
+        await FileDownloaded.create({
+            fileURL: fileURL,
+            userId: userId
+        });
+        res.status(200).json({fileURL: fileURL});
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ err: err, error: 'Failed to download' });
     }
 }

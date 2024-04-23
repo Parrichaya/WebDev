@@ -49,7 +49,7 @@
 #leaderboard-container {
     position: absolute;
     top: 180px;
-    left: 1050px;
+    left: 1600px;
 }
 
 #expenses {
@@ -63,8 +63,23 @@
     right: 610px;
 } */
 
-#form-block {
+/* #form-block {
     position: absolute;
     top: 500px;
     right: 560px;
+} */
+
+#form-block {
+    margin-top: 20px; /* Adjust as needed */
+    display: none;
+    max-width: 300px; /* Adjust the maximum width as needed */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    #form-block {
+        margin-top: 10px; /* Adjust as needed */
+    }
 }

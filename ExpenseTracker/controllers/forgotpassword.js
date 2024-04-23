@@ -67,6 +67,14 @@ exports.resetPassword = (req, res, next) => {
                 <html>
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+                <style>        
+                    .form-group1 {
+                        margin-top: 20px; 
+                        max-width: 300px; 
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                </style>
                     <body>
                         <div class="container-fluid">
                         <nav class="navbar navbar-dark bg-dark">
@@ -75,7 +83,7 @@ exports.resetPassword = (req, res, next) => {
                         <div class="row justify-content-center">
                             <div class="col-md-4">
                               <form action="/password/updatepassword/${id}" method="GET">
-                                <div class="form-group mb-1">
+                                <div class="form-group1 mb-1">
                                 <label for="password">Enter new password:</label>
                                   <input type="password" name="newpassword" class="form-control" required/>
                                 </div>
