@@ -36,12 +36,26 @@ exports.addExpense = async (req, res, next) => {
 
 
 // Get all expenses from the database
-exports.getExpenses = (req, res, next) => {
-    req.user.getExpenses()
-    .then((expenses) => {
-        res.status(200).json({allExpenses: expenses});
-    })
-    .catch(err => console.log(err));
+exports.getExpenses = async (req, res, next) => {
+    try {
+        const expenses = await req.user.getExpenses();
+        const itemsPerPage = 5;
+        const totalPages = Math.ceil(expenses.length / itemsPerPage); 
+        const currentPage = parseInt(req.query.page) || 1;
+
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = Math.min(startIndex + itemsPerPage, expenses.length);
+
+        const paginatedExpenses = expenses.slice(startIndex, endIndex);
+        res.status(200).json({
+            allExpenses: paginatedExpenses,
+            currentPage: currentPage,
+            totalPages: totalPages
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: 'An error occurred.' });
+    }
 }
 
 // Delete an expense from the database and update total expenses

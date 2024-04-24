@@ -53,13 +53,19 @@
         </div>
         <div class="col-md-4 mb-1">
             <ul id="expenses"></ul>
+            <div class =" justify-content-space-between" id="pagination-container" style="display: none">
+                <button id="previous-btn" disabled class="btn btn-secondary btn-sm page-btn"><</button>
+                <span id="page-num"></span>
+                <button id="next-btn" class="btn btn-secondary btn-sm page-btn">></button><br>
+            </div>
+            
         </div>
         <div>
             <button id="leaderboard-btn" style="display: none">Show Leaderboard</button>
         </div>
         <div id="leaderboard-container" class="mb-3"></div>
         <div class="d-flex justify-content-center">
-            <button onclick="download()" id="download-file-btn" class="btn btn-primary btn-sm" style="display: none;">Download File</button>       
+            <button onclick="download()" id="download-file-btn" class="btn btn-primary btn-sm">Download File</button>       
          </div>
         </div>
     </div>

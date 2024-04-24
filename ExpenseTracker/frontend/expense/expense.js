@@ -22,20 +22,19 @@ function expenseform(event) {
   }
   
 window.addEventListener("DOMContentLoaded", () => {
-  const token = localStorage.getItem("token");
-  axios
-      .get("http://localhost:5000/expense/get-expenses", { headers: { "Authorization": token } })
-      .then((response) => {
-          for (var i = 0; i < response.data.allExpenses.length; i++) {
-              displayExpensesOnScreen(response.data.allExpenses[i]);
-          }
-      })
-      .catch((error) => console.log(error));
+  fetchExpenses(currentPage);
 })
+
+const nextButton = document.getElementById('next-btn');
+const prevButton = document.getElementById('previous-btn');
+const pageNum = document.getElementById('page-num');
+const expensesList = document.getElementById('expenses');
+const pagination = document.getElementById('pagination-container');
+
+let currentPage = 1; // Initialize current page
 
 // Display expenses on screen
 function displayExpensesOnScreen(expenseDetails) {
-    const expensesList = document.getElementById("expenses")
     expensesList.classList.add("list-group"); 
 
     // Create a list item for the current expense
@@ -46,7 +45,7 @@ function displayExpensesOnScreen(expenseDetails) {
         <span>₹${expenseDetails.amount}</span>
         <span>${expenseDetails.description}</span>
         <span>${expenseDetails.category}</span>
-        <button class="btn btn-secondary delete-btn">Delete</button>
+        <button class="btn btn-secondary delete-btn">x</button>
     `;
 
     expensesList.appendChild(expenseItem);
@@ -61,7 +60,47 @@ function displayExpensesOnScreen(expenseDetails) {
           })
           .catch((error) => console.log(error));
     });
+
+    // Update the current page when displaying expenses
+    currentPage = expenseDetails.currentPage;
+    pagination.style.display = 'flex';
 }
+
+nextButton.addEventListener('click', () => {
+    currentPage += 1;
+    fetchExpenses(currentPage);
+});
+
+prevButton.addEventListener('click', () => {
+    currentPage -= 1;
+    fetchExpenses(currentPage);
+});
+
+// Function to fetch expenses for a specific page
+function fetchExpenses(page) {
+    const token = localStorage.getItem('token');
+    axios
+        .get(`http://localhost:5000/expense/get-expenses?page=${page}`, {
+            headers: { Authorization: token },
+        })
+        .then((response) => {
+            expensesList.innerHTML = '';
+            response.data.allExpenses.forEach(displayExpensesOnScreen);
+            const totalPages = response.data.totalPages;
+            currentPage = response.data.currentPage;
+
+            // Disable the "Previous" button if on the first page
+            prevButton.disabled = currentPage === 1;
+            // Disable the "Next" button if on the last page
+            nextButton.disabled = currentPage === totalPages;
+
+            const pageNum = document.getElementById('page-num');
+            pageNum.textContent = `Page ${currentPage} of ${totalPages}`;
+        })
+        .catch((error) => console.log(error));
+}
+
+
 
 const buyPremiumBtn = document.getElementById("rzp-button");
 buyPremiumBtn.addEventListener("click", (event) => {
@@ -128,6 +167,7 @@ buyPremiumBtn.addEventListener("click", (event) => {
     })
 
 const downloadBtn = document.getElementById("download-file-btn");
+downloadBtn.disabled = true;
 
 function userPremiumStatus() {
   axios
@@ -138,7 +178,7 @@ function userPremiumStatus() {
           if (isPremiumUser) {
               buyPremiumBtn.style.display = "none";
               leaderboardBtn.style.display = "block";
-              downloadBtn.style.display = "block";
+              downloadBtn.disabled = false;
 
           const premiumMsg = document.createElement("div");
           premiumMsg.classList.add("mb-1", "premium-user-msg");
