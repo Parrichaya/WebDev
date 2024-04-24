@@ -22,6 +22,8 @@ function expenseform(event) {
   }
   
 window.addEventListener("DOMContentLoaded", () => {
+  rowsPerPage = parseInt(localStorage.getItem("rowsPerPage")) || 3;
+  rowsPerPageOption.value = rowsPerPage;
   fetchExpenses(currentPage);
 })
 
@@ -30,8 +32,10 @@ const prevButton = document.getElementById('previous-btn');
 const pageNum = document.getElementById('page-num');
 const expensesList = document.getElementById('expenses');
 const pagination = document.getElementById('pagination-container');
+const rowsPerPageOption = document.getElementById('rows-per-page');
 
-let currentPage = 1; // Initialize current page
+let currentPage = 1;
+let rowsPerPage = 3;
 
 // Display expenses on screen
 function displayExpensesOnScreen(expenseDetails) {
@@ -45,7 +49,7 @@ function displayExpensesOnScreen(expenseDetails) {
         <span>₹${expenseDetails.amount}</span>
         <span>${expenseDetails.description}</span>
         <span>${expenseDetails.category}</span>
-        <button class="btn btn-secondary delete-btn">x</button>
+        <button class="btn btn-secondary delete-btn btn-sm">x</button>
     `;
 
     expensesList.appendChild(expenseItem);
@@ -76,11 +80,17 @@ prevButton.addEventListener('click', () => {
     fetchExpenses(currentPage);
 });
 
+rowsPerPageOption.addEventListener('change', () => {
+    rowsPerPage = parseInt(rowsPerPageOption.value);
+    localStorage.setItem('rowsPerPage', rowsPerPage);
+    fetchExpenses(currentPage);
+})
+
 // Function to fetch expenses for a specific page
 function fetchExpenses(page) {
     const token = localStorage.getItem('token');
     axios
-        .get(`http://localhost:5000/expense/get-expenses?page=${page}`, {
+        .get(`http://localhost:5000/expense/get-expenses?page=${page}&limit=${rowsPerPage}`, {
             headers: { Authorization: token },
         })
         .then((response) => {
@@ -89,10 +99,19 @@ function fetchExpenses(page) {
             const totalPages = response.data.totalPages;
             currentPage = response.data.currentPage;
 
-            // Disable the "Previous" button if on the first page
-            prevButton.disabled = currentPage === 1;
-            // Disable the "Next" button if on the last page
-            nextButton.disabled = currentPage === totalPages;
+            if (currentPage === 1) {
+                prevButton.disabled = true;
+            } else {
+                prevButton.disabled = false;
+            }
+
+            if (currentPage === totalPages) {
+                nextButton.disabled = true;
+                rowsPerPageOption.disabled = true;
+            } else {
+                nextButton.disabled = false;
+                rowsPerPageOption.disabled = false;
+            }
 
             const pageNum = document.getElementById('page-num');
             pageNum.textContent = `Page ${currentPage} of ${totalPages}`;

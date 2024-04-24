@@ -39,7 +39,7 @@ exports.addExpense = async (req, res, next) => {
 exports.getExpenses = async (req, res, next) => {
     try {
         const expenses = await req.user.getExpenses();
-        const itemsPerPage = 5;
+        const itemsPerPage = parseInt(req.query.limit) || 3;
         const totalPages = Math.ceil(expenses.length / itemsPerPage); 
         const currentPage = parseInt(req.query.page) || 1;
 
