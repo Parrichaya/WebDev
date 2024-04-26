@@ -105,7 +105,10 @@ function fetchExpenses(page) {
                 prevButton.disabled = false;
             }
 
-            if (currentPage === totalPages) {
+            if (currentPage === 1 && totalPages === 1) {
+                nextButton.disabled = true;
+                rowsPerPageOption.disabled = false;
+            } else if (currentPage !== 1 && totalPages !== 1 && currentPage === totalPages) {
                 nextButton.disabled = true;
                 rowsPerPageOption.disabled = true;
             } else {

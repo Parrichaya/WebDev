@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
 const helmet = require('helmet');
+
 require('dotenv').config();
+
 const sequelize = require('./util/database');
 const morgan = require('morgan');
 

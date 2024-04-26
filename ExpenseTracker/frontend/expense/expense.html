@@ -21,7 +21,7 @@
         </div>
         <div class="col-md-4">
           <form onsubmit="expenseform(event)">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6 mb-1">
                 <label for="dateInput" class="form-label">Enter a date:</label>
                 <input type="date" class="form-control" id="dateInput" name="dateInput"/><br>
             </div>    
@@ -51,7 +51,15 @@
             </div>
           </form>
         </div>
-        <div class="col-md-4 mb-1">
+        <div class="col-sm-4 mb-1">
+            <!-- <div>
+                <label for="filter">Filter By:</label>
+                <select id="filter">
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                </select>
+            </div> -->
             <ul id="expenses"></ul>
             <div class =" justify-content-space-between" id="pagination-container" style="display: none">
                 <button id="previous-btn" disabled class="btn btn-secondary btn-sm page-btn"><</button>
@@ -65,7 +73,7 @@
                 </select>
             </div>            
         </div>
-        <div class="col-md-3 mb-1 leaderboard-btn-container"  >
+        <div class="col-md-2 mb-1 leaderboard-btn-container"  >
             <button id="leaderboard-btn" style="display: none">Show Leaderboard</button>
             <div id="leaderboard-container" class="mb-3"></div>
         </div>

@@ -37,18 +37,20 @@ exports.addExpense = async (req, res, next) => {
 
 // Get all expenses from the database
 exports.getExpenses = async (req, res, next) => {
-    try {
-        const expenses = await req.user.getExpenses();
-        const itemsPerPage = parseInt(req.query.limit) || 3;
-        const totalPages = Math.ceil(expenses.length / itemsPerPage); 
+    try {        
+        const itemsPerPage = parseInt(req.query.limit) || 3;        
         const currentPage = parseInt(req.query.page) || 1;
+        const {count, rows: expenses} = await Expense.findAndCountAll({
+            offset: (currentPage - 1) * itemsPerPage,
+            limit: itemsPerPage
+        })
+        const totalPages = Math.ceil(count / itemsPerPage); 
+        // const startIndex = (currentPage - 1) * itemsPerPage;
+        // const endIndex = Math.min(startIndex + itemsPerPage, expenses.length);
 
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        const endIndex = Math.min(startIndex + itemsPerPage, expenses.length);
-
-        const paginatedExpenses = expenses.slice(startIndex, endIndex);
+        // const paginatedExpenses = expenses.slice(startIndex, endIndex);
         res.status(200).json({
-            allExpenses: paginatedExpenses,
+            allExpenses: expenses,
             currentPage: currentPage,
             totalPages: totalPages
         });
